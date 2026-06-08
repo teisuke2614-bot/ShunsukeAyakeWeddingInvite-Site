@@ -141,6 +141,9 @@
     <p class="rsvp-footer__date">RSVP Admin Dashboard</p>
   </footer>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="script.js"></script>
   <script>
     // ============================================================
@@ -148,9 +151,10 @@
     // ============================================================
     let currentFilter = 'all';
     let searchQuery = '';
+    let allResponsesData = [];
 
     function updateStats() {
-      const responses = getResponses();
+      const responses = allResponsesData;
       const attending = responses.filter(r => r.attendance === '出席');
       const absent = responses.filter(r => r.attendance === '欠席');
 
@@ -181,7 +185,7 @@
     }
 
     function renderTable() {
-      let responses = getResponses();
+      let responses = [...allResponsesData];
 
       // Apply filter
       if (currentFilter !== 'all') {
@@ -256,31 +260,32 @@
       renderTable();
     }
 
-    function handleDelete(id) {
+    async function handleDelete(id) {
       if (confirm('この回答を削除しますか？')) {
-        deleteResponse(id);
+        await deleteResponse(id);
         refresh();
       }
     }
 
-    function handleClearAll() {
-      const count = getResponses().length;
+    async function handleClearAll() {
+      const count = allResponsesData.length;
       if (count === 0) {
         alert('削除するデータがありません');
         return;
       }
       if (confirm(`${count}件の回答をすべて削除しますか？\nこの操作は取り消せません。`)) {
-        clearAllResponses();
+        await clearAllResponses();
         refresh();
       }
     }
 
-    function handleAddSample() {
-      addSampleData();
+    async function handleAddSample() {
+      await addSampleData();
       refresh();
     }
 
-    function refresh() {
+    async function refresh() {
+      allResponsesData = await getResponses();
       updateStats();
       renderTable();
     }

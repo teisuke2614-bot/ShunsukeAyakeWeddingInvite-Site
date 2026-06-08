@@ -6,6 +6,24 @@
 const STORAGE_KEY = 'wedding_rsvp_responses';
 
 // ============================================================
+// FIREBASE SETUP
+// ============================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyAuqVqpHIIAfcqdMpNKHuEAKkFNei13BSc",
+  authDomain: "shunayakaweddingsite.firebaseapp.com",
+  projectId: "shunayakaweddingsite",
+  storageBucket: "shunayakaweddingsite.firebasestorage.app",
+  messagingSenderId: "61051359742",
+  appId: "1:61051359742:web:e87d66bf683a5ef4e930af"
+};
+
+// Initialize Firebase (Compat SDK)
+if (typeof firebase !== 'undefined') {
+  firebase.initializeApp(firebaseConfig);
+}
+const db = typeof firebase !== 'undefined' ? firebase.firestore() : null;
+
+// ============================================================
 // STEP NAVIGATION
 // ============================================================
 let currentStep = 1;
@@ -305,7 +323,7 @@ function collectFormData() {
 // ============================================================
 // FORM SUBMISSION
 // ============================================================
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
 
   // Validate all steps
@@ -313,17 +331,36 @@ function handleSubmit(e) {
 
   const data = collectFormData();
 
-  // Save to localStorage
-  saveResponse(data);
+  // Show loading state
+  const submitBtn = document.querySelector('button[onclick="handleSubmit(event)"]') || document.querySelector('button[type="submit"]');
+  const originalText = submitBtn ? submitBtn.innerHTML : '';
+  if (submitBtn) {
+    submitBtn.innerHTML = '送信中...';
+    submitBtn.disabled = true;
+  }
 
-  // Show confirmation
-  showConfirmation(data);
+  try {
+    await saveResponse(data);
+    showConfirmation(data);
+  } catch (err) {
+    console.error("保存エラー:", err);
+    alert("送信に失敗しました。もう一度お試しください。");
+    if (submitBtn) {
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  }
 }
 
-function saveResponse(data) {
-  const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  responses.push(data);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+async function saveResponse(data) {
+  if (db) {
+    await db.collection("responses").doc(data.id).set(data);
+  } else {
+    // Fallback to localStorage if Firebase is not initialized
+    const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    responses.push(data);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+  }
 }
 
 function showConfirmation(data) {
@@ -383,21 +420,42 @@ function showConfirmation(data) {
 // ============================================================
 // ADMIN PAGE FUNCTIONS (shared)
 // ============================================================
-function getResponses() {
+async function getResponses() {
+  if (db) {
+    const snapshot = await db.collection("responses").get();
+    const responses = [];
+    snapshot.forEach(doc => {
+      responses.push(doc.data());
+    });
+    return responses;
+  }
   return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 }
 
-function deleteResponse(id) {
-  const responses = getResponses().filter(r => r.id !== id);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+async function deleteResponse(id) {
+  if (db) {
+    await db.collection("responses").doc(id).delete();
+  } else {
+    const responses = (await getResponses()).filter(r => r.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+  }
 }
 
-function clearAllResponses() {
-  localStorage.removeItem(STORAGE_KEY);
+async function clearAllResponses() {
+  if (db) {
+    const snapshot = await db.collection("responses").get();
+    const batch = db.batch();
+    snapshot.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+    await batch.commit();
+  } else {
+    localStorage.removeItem(STORAGE_KEY);
+  }
 }
 
-function exportCSV() {
-  const responses = getResponses();
+async function exportCSV() {
+  const responses = await getResponses();
   if (responses.length === 0) {
     alert('エクスポートするデータがありません');
     return;
@@ -441,7 +499,7 @@ function exportCSV() {
   URL.revokeObjectURL(url);
 }
 
-function addSampleData() {
+async function addSampleData() {
   const sampleData = [
     {
       id: 's1', timestamp: new Date().toISOString(), attendance: '出席',
@@ -480,6 +538,15 @@ function addSampleData() {
     }
   ];
 
-  const existing = getResponses();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([...existing, ...sampleData]));
+  if (db) {
+    const batch = db.batch();
+    sampleData.forEach(data => {
+      const ref = db.collection("responses").doc(data.id);
+      batch.set(ref, data);
+    });
+    await batch.commit();
+  } else {
+    const existing = await getResponses();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...existing, ...sampleData]));
+  }
 }
