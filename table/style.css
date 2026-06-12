@@ -1,0 +1,557 @@
+/* ============================================================
+   Table Site - Shunsuke & Ayaka
+   ============================================================ */
+
+/* --- CSS Custom Properties (Inherited & Adjusted) --- */
+:root {
+  --color-cream: #FFF8F0;
+  --color-cream-light: #FFFCF8;
+  --color-sage: #A3B18A;
+  --color-sage-medium: #8B9A6B;
+  --color-sage-dark: #5E6E4A;
+  --color-pink: #E8C4B8;
+  --color-pink-light: #F5E4DC;
+  --color-gold: #C9A96E;
+  --color-brown: #3A3230;
+  --color-brown-medium: #6B6360;
+  --color-brown-light: #9A9490;
+  --color-terra: #B8756C;
+  --color-white: #FFFFFF;
+
+  --font-script: 'Great Vibes', cursive;
+  --font-serif-en: 'Cormorant Garamond', serif;
+  --font-serif-jp: 'Noto Serif JP', serif;
+  --font-sans-jp: 'Noto Sans JP', sans-serif;
+
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
+  
+  --shadow-soft: 0 4px 20px rgba(58, 50, 48, 0.08);
+  --shadow-medium: 0 8px 30px rgba(58, 50, 48, 0.12);
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans-jp);
+  color: var(--color-brown);
+  background-color: var(--color-cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Floating petals */
+.petal {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--color-pink-light);
+  border-radius: 50% 0 50% 50%;
+  opacity: 0;
+  animation: floatPetal linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.petal:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+.petal:nth-child(2) { left: 80%; animation-duration: 15s; animation-delay: 2s; background: var(--color-pink); width: 20px; height: 20px; }
+.petal:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: 4s; }
+.petal:nth-child(4) { left: 60%; animation-duration: 14s; animation-delay: 1s; }
+.petal:nth-child(5) { left: 90%; animation-duration: 18s; animation-delay: 5s; }
+
+@keyframes floatPetal {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* Animations */
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUpAnim 0.8s ease forwards;
+}
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes slideUpAnim {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Layout --- */
+.app-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.header__date {
+  font-family: var(--font-serif-en);
+  letter-spacing: 0.2em;
+  color: var(--color-sage-medium);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.header__title {
+  font-family: var(--font-script);
+  font-size: 3.5rem;
+  color: var(--color-terra);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.header__title span {
+  font-size: 2.5rem;
+  color: var(--color-gold);
+}
+
+.header__subtitle {
+  font-family: var(--font-serif-en);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  color: var(--color-brown-medium);
+  margin-bottom: 1.5rem;
+}
+
+.header__message {
+  font-family: var(--font-serif-jp);
+  font-size: 0.85rem;
+  color: var(--color-brown);
+  line-height: 2;
+}
+
+/* --- Cards --- */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--color-cream-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.card__header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.card__accent-script {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--color-gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+  opacity: 0.8;
+  transform: rotate(-3deg);
+}
+
+.card__title {
+  font-family: var(--font-serif-en);
+  font-size: 1.4rem;
+  color: var(--color-sage-dark);
+  letter-spacing: 0.05em;
+}
+
+.card__subtitle {
+  font-family: var(--font-serif-jp);
+  font-size: 0.75rem;
+  color: var(--color-brown-light);
+}
+
+.card__body {
+  text-align: center;
+}
+
+.card__text {
+  font-size: 0.85rem;
+  color: var(--color-brown-medium);
+  margin-bottom: 1.25rem;
+}
+
+.card__note {
+  font-size: 0.7rem;
+  color: var(--color-brown-light);
+  margin-top: 0.75rem;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn--primary {
+  background: var(--color-sage-medium);
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(139, 154, 107, 0.3);
+}
+
+.btn--primary:hover, .btn--primary:active {
+  background: var(--color-sage-dark);
+  transform: translateY(-1px);
+}
+
+/* --- Quiz --- */
+.quiz-container {
+  margin-top: 1rem;
+}
+
+.quiz-question {
+  display: none;
+}
+.quiz-question.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+.quiz-q-text {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  color: var(--color-brown);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-option {
+  background: var(--color-white);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--color-brown);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  background: var(--color-cream);
+}
+
+.quiz-option.correct {
+  background: var(--color-sage-medium);
+  color: var(--color-white);
+  border-color: var(--color-sage-medium);
+}
+
+.quiz-option.wrong {
+  background: var(--color-terra);
+  color: var(--color-white);
+  border-color: var(--color-terra);
+}
+
+.quiz-feedback {
+  margin-top: 1rem;
+  font-weight: 500;
+  min-height: 1.5rem;
+  font-size: 0.9rem;
+}
+.quiz-feedback.correct-text { color: var(--color-sage-dark); }
+.quiz-feedback.wrong-text { color: var(--color-terra); }
+
+.quiz-next {
+  margin-top: 1rem;
+  display: none;
+}
+
+/* --- Scratch --- */
+.scratch-wrapper {
+  position: relative;
+  width: 280px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+  border: 2px solid var(--color-gold);
+}
+
+.scratch-result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.scratch-result-text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-terra);
+  letter-spacing: 0.1em;
+}
+
+.scratch-result-text.win {
+  color: var(--color-sage-dark);
+}
+
+#scratch-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* --- Passcode --- */
+.passcode-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.passcode-input {
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  outline: none;
+  font-family: inherit;
+  color: var(--color-brown);
+}
+
+.passcode-input:focus {
+  border-color: var(--color-sage-dark);
+  box-shadow: 0 0 0 2px rgba(163, 177, 138, 0.2);
+}
+
+.passcode-error {
+  color: var(--color-terra);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  min-height: 1.2rem;
+}
+
+/* --- Easter Egg (Pixel Characters) --- */
+.pixel-characters {
+  position: absolute;
+  bottom: 30px;
+  right: 20px; /* 右下に固定（消えない） */
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+  z-index: 100;
+  cursor: pointer;
+}
+
+/* ドット絵風の上下の揺れ（待機モーション） */
+.pixel-char {
+  animation: bounce 0.6s steps(2, end) infinite;
+}
+.pixel-char:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+/* 簡易マリオ風ブロック（仮のプレースホルダー） */
+.pixel-mario {
+  width: 24px;
+  height: 28px;
+  background-color: #fbd8b4; /* 肌色 */
+  position: relative;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.2);
+}
+.pixel-mario::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: -4px; width: 28px; height: 12px;
+  background: #e52521; /* 赤い帽子 */
+}
+.pixel-mario::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; width: 24px; height: 12px;
+  background: #0000ff; /* 青いオーバーオール */
+}
+
+/* 簡易ピーチ姫風ブロック（仮のプレースホルダー） */
+.pixel-peach {
+  width: 24px;
+  height: 28px;
+  background-color: #fbd8b4; /* 肌色 */
+  position: relative;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.2);
+}
+.pixel-peach::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: 0px; width: 24px; height: 10px;
+  background: #f8d820; /* 金髪・王冠 */
+}
+.pixel-peach::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: -4px; width: 32px; height: 16px;
+  background: #ffb6c1; /* ピンクのドレス */
+}
+
+/* 吹き出し（常に表示） */
+.pixel-speech {
+  position: absolute;
+  top: -45px;
+  left: -50px;
+  background: var(--color-gold);
+  color: #fff;
+  font-family: var(--font-sans-jp);
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 1; /* 常に表示 */
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.pixel-speech::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 20px;
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: var(--color-gold) transparent transparent transparent;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.footer__script {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+}
+
+.footer__names {
+  font-family: var(--font-serif-en);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--color-brown-light);
+  text-transform: uppercase;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   Mario Mode (Secret Easter Egg)
+   ========================================================================== */
+body.mario-mode {
+  --color-bg: #5c94fc; /* マリオの空の色 */
+  --color-text: #fff;
+  --color-primary: #c84c0c; /* レンガ色 */
+  --color-primary-dark: #a04000;
+  --color-secondary: #f8d820; /* コイン色 */
+  --color-accent: #f8d820;
+  --color-gold: #f8d820;
+  --color-gold-light: #fff;
+  --color-terra: #c84c0c;
+  --color-cream: #5c94fc;
+  --color-cream-light: #c84c0c;
+  --color-brown: #fff;
+  --color-brown-medium: #fff;
+  --color-brown-light: #fff;
+  --font-serif-en: 'DotGothic16', sans-serif;
+  --font-serif-jp: 'DotGothic16', sans-serif;
+  --font-sans-jp: 'DotGothic16', sans-serif;
+  --font-script: 'DotGothic16', sans-serif;
+  
+  /* サイト全体に黒いドロップシャドウをつけてゲーム感を強調 */
+  text-shadow: 2px 2px 0 #000;
+}
+
+body.mario-mode .card {
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+body.mario-mode .btn {
+  background-color: #f8d820;
+  color: #000;
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+body.mario-mode .btn:hover {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+body.mario-mode .scratch-wrapper {
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+body.mario-mode .header__title,
+body.mario-mode .header__title span,
+body.mario-mode .header__date,
+body.mario-mode .header__subtitle {
+  color: #fff;
+}
+
+body.mario-mode .card__accent-script {
+  color: #f8d820;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Special Quiz | Shunsuke & Ayaka</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+
+  <div class="app-container">
+    <header class="header slide-up">
+      <h1 class="header__title" style="font-size: 2.5rem;">Special Quiz</h1>
+      <p class="header__subtitle">新郎新婦クイズ</p>
+    </header>
+
+    <main class="content">
+      <section class="card slide-up delay-1">
+        
+        <!-- パスコード入力画面 -->
+        <div id="passcode-section">
+          <div class="card__header">
+            <span class="card__accent-script">Are you ready?</span>
+            <h2 class="card__title">Quiz Time</h2>
+            <p class="card__subtitle">準備はよろしいですか？</p>
+          </div>
+          <div class="card__body">
+            <p class="card__text">
+              司会から発表される<strong>開始パスコード</strong>を入力して<br>
+              クイズに参加してください。
+            </p>
+            <div class="passcode-container">
+              <input type="text" id="passcode-input" class="passcode-input" placeholder="パスコード" autocomplete="off">
+              <button id="passcode-btn" class="btn btn--primary">クイズに参加する</button>
+            </div>
+            <p id="passcode-error" class="passcode-error"></p>
+          </div>
+        </div>
+
+        <!-- クイズ画面 -->
+        <div id="quiz-section" style="display: none;">
+          <div class="card__body">
+            <div class="quiz-container" id="quiz-container">
+              <!-- クイズの中身はJSで生成します -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="text-center slide-up delay-2" style="margin-top: 1rem;">
+        <a href="index.html" style="font-size: 0.85rem; color: var(--color-brown-light); text-decoration: underline;">← ホームに戻る</a>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

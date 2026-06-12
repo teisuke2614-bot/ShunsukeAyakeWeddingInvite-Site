@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Welcome to Our Reception | Shunsuke & Ayaka</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DotGothic16&family=Great+Vibes&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background Petals -->
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+
+  <div class="app-container">
+    
+    <!-- HEADER -->
+    <header class="header slide-up">
+      <p class="header__date">2026.11.22</p>
+      <h1 class="header__title">Shunsuke <span>&amp;</span> Ayaka</h1>
+      <p class="header__subtitle">Welcome to Our Reception</p>
+      <p class="header__message">
+        本日は私たちのためにお集まりいただき<br>
+        本当にありがとうございます<br><br>
+        皆様に少しでも楽しい時間を過ごしていただけるよう<br>
+        ささやかなコンテンツをご用意しました<br>
+        お食事や歓談と合わせてお楽しみください
+      </p>
+    </header>
+
+    <!-- CONTENT CARDS -->
+    <main class="content">
+
+      <!-- 1. Photo Share -->
+      <section class="card slide-up delay-1">
+        <div class="card__header">
+          <span class="card__accent-script">Memories</span>
+          <h2 class="card__title">Photo Share</h2>
+          <p class="card__subtitle">お写真のシェアをお願いします</p>
+        </div>
+        <div class="card__body">
+          <p class="card__text">
+            今日の素敵な瞬間を、ぜひ皆様のカメラでも残していただけると嬉しいです。<br>
+            撮っていただいたお写真は、後で二人でゆっくり振り返りたいので、こちらのアルバムへ共有をお願いします。
+          </p>
+          <a href="#" class="btn btn--primary" id="photo-share-btn">
+            写真アルバムを開く
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. Quiz Game -->
+      <section class="card slide-up delay-2">
+        <div class="card__header">
+          <span class="card__accent-script">Our Story</span>
+          <h2 class="card__title">Special Quiz</h2>
+          <p class="card__subtitle">新郎新婦クイズ</p>
+        </div>
+        <div class="card__body">
+          <p class="card__text">
+            披露宴の途中で、二人にまつわるクイズ大会を行います！<br>
+            意外なエピソードも飛び出すかも…？<br>
+            司会から開始の合図があるまで、どうぞお楽しみに。
+          </p>
+          <a href="quiz.html" class="btn btn--primary">
+            クイズ会場はこちら
+          </a>
+        </div>
+      </section>
+
+      <!-- 3. Scratch Game -->
+      <section class="card slide-up delay-3" id="scratch-section">
+        <div class="card__header">
+          <span class="card__accent-script">Surprise</span>
+          <h2 class="card__title">Lucky Scratch</h2>
+          <p class="card__subtitle">スクラッチ・チャンス</p>
+        </div>
+        <div class="card__body">
+          <p class="card__text">
+            グレーの部分を指でこすってみてください。<br>
+            もし「当たり」が出た方には、後ほど素敵なプレゼントをお渡しします！
+          </p>
+          
+          <div class="scratch-wrapper">
+            <div class="scratch-result" id="scratch-result">
+              <span class="scratch-result-text" id="scratch-result-text">ハズレ</span>
+            </div>
+            <canvas id="scratch-canvas" width="280" height="150"></canvas>
+          </div>
+          <p class="card__note" id="scratch-instruction">グレーの部分を指でこすってください</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="position: relative; overflow: hidden; padding-bottom: 4rem;">
+      <!-- Easter Egg: ドット絵キャラクター (動画との伏線) -->
+      <!-- ※後日ご自身で作成した画像ファイルに差し替える場合は、以下の<div class="pixel-mario">などを<img>タグに変えてください -->
+      <div class="pixel-characters" id="pixel-chars">
+        <div class="pixel-char">
+          <div class="pixel-mario"></div>
+        </div>
+        <div class="pixel-char">
+          <div class="pixel-peach"></div>
+        </div>
+        <!-- 常に話しかけてくる吹き出し -->
+        <div class="pixel-speech" id="pixel-speech">やあ！</div>
+      </div>
+
+      <p class="footer__script">Thank you for coming today</p>
+      <p class="footer__names">Shunsuke &amp; Ayaka</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
