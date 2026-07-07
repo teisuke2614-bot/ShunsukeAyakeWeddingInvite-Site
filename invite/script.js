@@ -136,14 +136,7 @@ function validateStep(step) {
   }
 
   if (step === 3) {
-    const attendance = document.querySelector('input[name="attendance"]:checked');
-    if (attendance && attendance.value === '出席') {
-      const meal = document.querySelector('input[name="meal"]:checked');
-      if (!meal) {
-        showError('err-meal');
-        isValid = false;
-      }
-    }
+    // No meal validation needed anymore
   }
 
   return isValid;
@@ -163,39 +156,6 @@ function clearErrors() {
 // COMPANION SECTION TOGGLE
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Show/hide companion section based on attendance
-  const attendRadios = document.querySelectorAll('input[name="attendance"]');
-  attendRadios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      const companionSection = document.getElementById('companion-section');
-      const mealCard = document.getElementById('meal-card');
-      if (radio.value === '出席') {
-        companionSection.classList.add('visible');
-        if (mealCard) mealCard.style.display = '';
-      } else {
-        companionSection.classList.remove('visible');
-        if (mealCard) mealCard.style.display = '';
-      }
-    });
-  });
-
-  // Toggle companion name fields
-  const hasCompanion = document.getElementById('has-companion');
-  if (hasCompanion) {
-    hasCompanion.addEventListener('change', () => {
-      const fields = document.getElementById('companion-fields');
-      fields.style.display = hasCompanion.checked ? 'block' : 'none';
-    });
-  }
-
-  // Companion count change
-  const companionCount = document.getElementById('companion-count');
-  if (companionCount) {
-    companionCount.addEventListener('change', () => {
-      updateCompanionFields(parseInt(companionCount.value));
-    });
-  }
-
   // Form submit handler
   const form = document.getElementById('rsvp-form');
   if (form) {
@@ -221,21 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function updateCompanionFields(count) {
-  const container = document.getElementById('companion-names');
-  container.innerHTML = '';
-  for (let i = 1; i <= count; i++) {
-    container.innerHTML += `
-      <div class="companion-entry">
-        <div class="form-group">
-          <label class="form-label" for="companion-name-${i}">同伴者${i}のお名前</label>
-          <input type="text" class="form-input" id="companion-name-${i}" name="companionName${i}" placeholder="お名前を入力">
-        </div>
-      </div>
-    `;
-  }
-}
-
 // ============================================================
 // REVIEW GENERATION
 // ============================================================
@@ -256,10 +201,6 @@ function generateReview() {
   rows.push(['新郎新婦との関係', data.relationship]);
 
   if (data.attendance === '出席') {
-    if (data.hasCompanion && data.companionNames.length > 0) {
-      rows.push(['同伴者', data.companionNames.join('、')]);
-    }
-    if (data.meal) rows.push(['お食事', data.meal]);
     if (data.allergy) rows.push(['アレルギー', data.allergy]);
     rows.push(['送迎バス', data.shuttle]);
   }
@@ -284,20 +225,7 @@ function generateReview() {
 // ============================================================
 function collectFormData() {
   const attendance = document.querySelector('input[name="attendance"]:checked');
-  const meal = document.querySelector('input[name="meal"]:checked');
   const shuttle = document.querySelector('input[name="shuttle"]:checked');
-  const hasCompanion = document.getElementById('has-companion');
-  const companionCount = document.getElementById('companion-count');
-
-  const companionNames = [];
-  if (hasCompanion && hasCompanion.checked && companionCount) {
-    for (let i = 1; i <= parseInt(companionCount.value); i++) {
-      const input = document.getElementById(`companion-name-${i}`);
-      if (input && input.value.trim()) {
-        companionNames.push(input.value.trim());
-      }
-    }
-  }
 
   return {
     id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
@@ -310,10 +238,10 @@ function collectFormData() {
     email: document.getElementById('email').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     relationship: document.getElementById('relationship').value,
-    hasCompanion: hasCompanion ? hasCompanion.checked : false,
-    companionCount: companionCount ? parseInt(companionCount.value) : 0,
-    companionNames: companionNames,
-    meal: meal ? meal.value : '',
+    hasCompanion: false,
+    companionCount: 0,
+    companionNames: [],
+    meal: '',
     allergy: document.getElementById('allergy').value.trim(),
     shuttle: shuttle ? shuttle.value : '利用しない',
     message: document.getElementById('message').value.trim(),
@@ -393,12 +321,8 @@ function showConfirmation(data) {
   ];
 
   if (data.attendance === '出席') {
-    if (data.meal) rows.push(['お食事', data.meal]);
     if (data.allergy) rows.push(['アレルギー', data.allergy]);
     rows.push(['送迎バス', data.shuttle]);
-    if (data.companionNames.length > 0) {
-      rows.push(['同伴者', data.companionNames.join('、')]);
-    }
   }
 
   if (data.message) rows.push(['メッセージ', data.message]);

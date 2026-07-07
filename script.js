@@ -121,18 +121,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     const diff = weddingDate - now;
 
-    if (diff <= 0) return;
+    const cdDays = document.getElementById('cd-days');
+    const cdTime = document.getElementById('cd-time');
+
+    if (!cdDays || !cdTime) return;
+
+    if (diff <= 0) {
+      cdDays.innerText = '0';
+      cdTime.innerText = '00:00:00';
+      return;
+    }
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    // Could display this somewhere if needed
-    // console.log(`${days}日 ${hours}時間 ${minutes}分`);
+    const pad = (num) => num.toString().padStart(2, '0');
+
+    cdDays.innerText = days;
+    cdTime.innerHTML = `
+      <div class="time-block">
+        <span class="time-num">${hours}</span>
+        <span class="time-label">HOURS</span>
+      </div>
+      <div class="time-block">
+        <span class="time-num">${pad(minutes)}</span>
+        <span class="time-label">MINUTES</span>
+      </div>
+      <div class="time-block">
+        <span class="time-num">${pad(seconds)}</span>
+        <span class="time-label">SECONDS</span>
+      </div>
+    `;
   };
 
   updateCountdown();
-  setInterval(updateCountdown, 60000);
+  setInterval(updateCountdown, 1000);
 
   // ============================================================
   // PARALLAX-LIKE EFFECT on Petals

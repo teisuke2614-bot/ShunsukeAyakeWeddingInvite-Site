@@ -16,25 +16,25 @@
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a href="#top" class="nav__logo" id="nav-logo">
-        Shunsuke &amp; Ayaka
-        <small>WEDDING</small>
+        <span class="nav__logo-main">WEDDING INVITATION</span>
+        <span class="nav__logo-sub">
+          <span class="nav__logo-line"></span>
+          2026.11.22
+          <span class="nav__logo-line"></span>
+        </span>
       </a>
 
       <ul class="nav__menu" id="nav-menu">
         <li><a href="#top" class="nav__link">Top</a></li>
         <li><a href="#greeting" class="nav__link">Greeting</a></li>
-        <li><a href="#info" class="nav__link">Date &amp; Venue</a></li>
-        <li><a href="#schedule" class="nav__link">Schedule</a></li>
+        <li><a href="#profile" class="nav__link">Profile</a></li>
+        <li><a href="#gallery" class="nav__link">Gallery</a></li>
+        <li><a href="#message" class="nav__link">Message</a></li>
         <li><a href="#access" class="nav__link">Access</a></li>
-        <li><a href="#notice" class="nav__link">Guest Info</a></li>
         <li><a href="invite/index.html" class="nav__rsvp" id="nav-rsvp">RSVP<span>ご出欠のご連絡</span></a></li>
       </ul>
 
-      <button class="nav__hamburger" id="nav-hamburger" aria-label="メニューを開く">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
     </div>
   </nav>
 
@@ -43,10 +43,10 @@
     <button class="mobile-menu__close" id="mobile-menu-close" aria-label="メニューを閉じる">✕</button>
     <a href="#top" class="mobile-menu__link">Top</a>
     <a href="#greeting" class="mobile-menu__link">Greeting</a>
-    <a href="#info" class="mobile-menu__link">Date &amp; Venue</a>
-    <a href="#schedule" class="mobile-menu__link">Schedule</a>
+    <a href="#profile" class="mobile-menu__link">Profile</a>
+    <a href="#gallery" class="mobile-menu__link">Gallery</a>
+    <a href="#message" class="mobile-menu__link">Message</a>
     <a href="#access" class="mobile-menu__link">Access</a>
-    <a href="#notice" class="mobile-menu__link">Guest Info</a>
     <a href="invite/index.html" class="mobile-menu__link">RSVP</a>
   </div>
 
@@ -67,7 +67,7 @@
           <p class="hero__subtitle-en" style="animation-delay: 0s; margin-bottom: var(--space-sm);">
             Wedding Invitation
           </p>
-          <h1 class="hero__script">Shunsuke<br>&amp; Ayaka</h1>
+          <h1 class="hero__title">Shunsuke<br>&amp; Ayaka</h1>
           <p class="hero__subtitle-jp">
             私たちの結婚式にご招待いたします
           </p>
@@ -76,7 +76,7 @@
         <div class="hero__photo-area">
           <img
             src="assets/hero_couple.png"
-            alt="俊佐と采加"
+            alt="新郎新婦"
             class="hero__photo-main"
             id="hero-photo"
           >
@@ -86,49 +86,22 @@
             class="hero__photo-accent"
           >
           <span class="hero__decor-script">We begin our forever</span>
-
-          <a href="invite/index.html" class="hero__rsvp-badge" id="hero-rsvp">
-            <span class="rsvp-label">RSVP</span>
-            <span class="rsvp-sub">ご出欠のご連絡</span>
-          </a>
         </div>
       </div>
     </div>
 
     <!-- Hero Info Bar -->
     <div class="hero__info">
-      <div class="hero__info-inner">
-        <div class="hero__social" id="hero-social">
-          <a href="#" aria-label="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-          </a>
-          <a href="#" aria-label="LINE">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.81 2 10.5c0 2.63 1.39 4.97 3.57 6.53-.13.47-.83 2.95-.86 3.14 0 0-.02.15.06.21.08.06.18.03.18.03.24-.03 2.78-1.84 3.93-2.7.67.1 1.37.15 2.12.15 5.52 0 10-3.31 10-7.86S17.52 2 12 2z"/></svg>
-          </a>
-        </div>
-
-        <div class="hero__names" id="hero-names">
-          <div class="hero__names-script">Shunsuke &amp; Ayaka</div>
-          <div class="hero__names-detail">
-            <div>
-              <div class="name-role">新郎 Groom</div>
-              <div class="name-kanji">俊佐</div>
-              <div class="name-reading">（とりごえ しゅんすけ）</div>
-            </div>
-            <div class="name-divider"></div>
-            <div>
-              <div class="name-role">新婦 Bride</div>
-              <div class="name-kanji">采加</div>
-              <div class="name-reading">（あやか）</div>
-            </div>
-          </div>
-        </div>
-
+      <div class="hero__info-inner" style="justify-content: center;">
         <div class="hero__date" id="hero-date">
-          <div class="hero__date-frame">
-            <span class="hero__date-year">2026</span>
-            <span class="hero__date-day">11.22</span>
-            <span class="hero__date-weekday">SUN</span>
+          <div class="hero__countdown-box fade-in">
+            <div class="countdown-label-top">Count Down</div>
+            <div class="countdown-days-large" id="cd-days">--</div>
+            <div class="countdown-days-label">DAYS</div>
+            <div class="countdown-time-row" id="cd-time">
+              <!-- JS will inject time blocks here -->
+            </div>
+            <div class="countdown-target-date">To 2026.11.22</div>
           </div>
         </div>
       </div>
@@ -136,7 +109,7 @@
   </section>
 
   <!-- ========== GREETING / ご挨拶 ========== -->
-  <section class="concept section-padding" id="greeting">
+  <section class="concept section-padding" id="greeting" style="margin-top: 150px;">
     <div class="container">
       <div class="concept__inner">
         <div class="concept__text-area fade-in">
@@ -145,33 +118,65 @@
             <span class="section-heading__line" style="margin: var(--space-sm) 0;"></span>
             <p class="section-heading__jp">ご挨拶</p>
           </div>
-          <p class="concept__text">
-            謹啓　時下ますますご清栄のこととお慶び申し上げます<br><br>
-            このたび　私たちは結婚式を挙げることとなりました<br><br>
-            つきましては　日頃お世話になっております皆さまに<br>
-            感謝の気持ちを込めて<br>
-            ささやかな小宴を催したいと存じます<br><br>
-            ご多用中のところ誠に恐縮ではございますが<br>
-            ぜひご出席賜りますよう お願い申し上げます<br><br>
-            <span style="display: block; text-align: right; margin-top: var(--space-md); font-style: italic;">
-              謹白
-            </span>
-          </p>
-          <p style="text-align: right; font-family: var(--font-serif-jp); font-size: 0.85rem; color: var(--color-brown-medium); margin-top: var(--space-md);">
-            2026年 秋<br>
-            俊佐 ・ 采加
-          </p>
+          <div class="concept__text-wrapper">
+            <p class="concept__text" style="margin-bottom: var(--space-md);">
+              <span class="text-wrap">謹啓　</span><span class="text-wrap">時下ますますご清栄のことと</span><span class="text-wrap">お慶び申し上げます</span>
+            </p>
+            <p class="concept__text" style="margin-bottom: var(--space-md);">
+              <span class="text-wrap">このたび　</span><span class="text-wrap">私たちは結婚式を挙げることと</span><span class="text-wrap">なりました</span><br>
+              <span class="text-wrap">つきましては　</span><span class="text-wrap">日頃お世話になっております</span><span class="text-wrap">皆さまに</span><br>
+              <span class="text-wrap">感謝の気持ちを込めて　</span><span class="text-wrap">ささやかな小宴を</span><span class="text-wrap">催したいと存じます</span>
+            </p>
+            <p class="concept__text" style="margin-bottom: var(--space-md);">
+              <span class="text-wrap">ご多用中のところ</span><span class="text-wrap">誠に恐縮ではございますが</span><br>
+              <span class="text-wrap">ぜひご出席賜りますよう　</span><span class="text-wrap">お願い申し上げます</span>
+            </p>
+            <p class="concept__text" style="text-align: right; margin-top: var(--space-md); font-style: italic;">
+              <span class="text-wrap">謹白</span>
+            </p>
+            <p style="text-align: right; font-family: var(--font-serif-jp); font-size: 0.85rem; color: var(--color-brown-medium); margin-top: var(--space-md);">
+              <span class="text-wrap">2026年 秋</span><br>
+              <span class="text-wrap">俊佐 ・ 采加</span>
+            </p>
+          </div>
         </div>
-        <div class="concept__photos fade-in fade-in-delay-1">
-          <div class="concept__photo">
-            <img src="assets/wedding_couple_garden.png" alt="ガーデンを歩く二人">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROFILE / プロフィール ========== -->
+  <section class="profile section-padding" id="profile" style="background: #faf9f6;">
+    <div class="container">
+      <div class="section-heading fade-in" style="margin-bottom: var(--space-xl);">
+        <h2 class="section-heading__en">PROFILE</h2>
+        <span class="section-heading__line" style="margin: var(--space-sm) auto;"></span>
+        <p class="section-heading__jp">新郎新婦のご紹介</p>
+      </div>
+      
+      <div class="profile-area fade-in">
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-photo">
+              <img src="assets/hero_couple.png" alt="Shunsuke">
+            </div>
+            <div class="profile-info">
+              <span class="profile-role">GROOM</span>
+              <h3 class="profile-name">Shunsuke</h3>
+            </div>
           </div>
-          <div class="concept__photo">
-            <img src="assets/wedding_rings.png" alt="ウェディングリング">
+          <p class="profile-desc">共に支え合い、温かい家庭を築いていきたいと思っております。</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-photo">
+              <img src="assets/hero_couple.png" alt="Ayaka">
+            </div>
+            <div class="profile-info">
+              <span class="profile-role">BRIDE</span>
+              <h3 class="profile-name">Ayaka</h3>
+            </div>
           </div>
-          <div class="concept__photo">
-            <img src="assets/wedding_ceremony.png" alt="セレモニー">
-          </div>
+          <p class="profile-desc">笑顔の絶えない、明るい時間を皆様と分かち合えることを楽しみにしています。</p>
         </div>
       </div>
     </div>
@@ -211,15 +216,6 @@
                 </span>
               </div>
             </div>
-            <div class="info-card__row">
-              <span class="info-card__label">受付</span>
-              <div class="info-card__value">
-                挙式 30分前より受付開始<br>
-                <span style="font-size: 0.8rem; color: var(--color-brown-medium);">
-                  お時間に余裕をもってお越しください
-                </span>
-              </div>
-            </div>
             <div class="info-card__row" style="border-bottom: none;">
               <span class="info-card__label">TEL</span>
               <div class="info-card__value">
@@ -231,51 +227,7 @@
 
         <!-- Photo -->
         <div class="info-photo fade-in fade-in-delay-1">
-          <img src="assets/wedding_venue.png" alt="会場外観" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-medium); width: 100%; height: 100%; object-fit: cover;">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SCHEDULE / 当日の流れ ========== -->
-  <section class="schedule section-padding" id="schedule">
-    <div class="container">
-      <div class="section-heading fade-in">
-        <h2 class="section-heading__en">SCHEDULE</h2>
-        <span class="section-heading__line"></span>
-        <p class="section-heading__jp">当日のタイムスケジュール</p>
-      </div>
-
-      <div class="schedule__timeline fade-in">
-        <div class="schedule__item" id="sched-1">
-          <div class="schedule__item-dot"></div>
-          <div class="schedule__item-time">10:30</div>
-          <div class="schedule__item-label">受付開始</div>
-        </div>
-        <div class="schedule__item" id="sched-2">
-          <div class="schedule__item-dot"></div>
-          <div class="schedule__item-time">11:00</div>
-          <div class="schedule__item-label">挙式</div>
-        </div>
-        <div class="schedule__item" id="sched-3">
-          <div class="schedule__item-dot"></div>
-          <div class="schedule__item-time">12:00</div>
-          <div class="schedule__item-label">披露宴 開宴</div>
-        </div>
-        <div class="schedule__item" id="sched-4">
-          <div class="schedule__item-dot"></div>
-          <div class="schedule__item-time">13:15</div>
-          <div class="schedule__item-label">お色直し</div>
-        </div>
-        <div class="schedule__item" id="sched-5">
-          <div class="schedule__item-dot"></div>
-          <div class="schedule__item-time">14:30</div>
-          <div class="schedule__item-label">結びの挨拶</div>
-        </div>
-        <div class="schedule__item" id="sched-6">
-          <div class="schedule__item-dot"></div>
-          <div class="schedule__item-time">15:00</div>
-          <div class="schedule__item-label">お開き</div>
+          <img src="assets/royal_chester.jpg" alt="ロイヤルチェスター長崎" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-medium); width: 100%; height: auto;">
         </div>
       </div>
     </div>
@@ -314,25 +266,31 @@
             <div class="info-card__body">
               <div class="info-card__row">
                 <span class="info-card__label">電車</span>
-                <div class="info-card__value">
-                  JR長崎本線「道ノ尾駅」より徒歩約3分<br>
-                  <span style="font-size: 0.8rem; color: var(--color-brown-medium);">
-                    長崎電気軌道「赤迫電停」より徒歩約10分
+                <div class="info-card__value" style="font-size: 0.85rem;">
+                  <span class="text-wrap">JR長崎本線「道ノ尾駅」より</span><span class="text-wrap">徒歩約3分</span><br>
+                  <span class="text-wrap" style="color: var(--color-brown-medium);">
+                    長崎電気軌道「赤迫電停」より
+                  </span>
+                  <span class="text-wrap" style="color: var(--color-brown-medium);">
+                    徒歩約10分
                   </span>
                 </div>
               </div>
               <div class="info-card__row">
                 <span class="info-card__label">バス</span>
-                <div class="info-card__value">
-                  長崎バス「道ノ尾」バス停より徒歩約5分
+                <div class="info-card__value" style="font-size: 0.85rem;">
+                  <span class="text-wrap">長崎バス「道ノ尾」バス停より</span><span class="text-wrap">徒歩約5分</span>
                 </div>
               </div>
               <div class="info-card__row" style="border-bottom: none;">
                 <span class="info-card__label">お車</span>
-                <div class="info-card__value">
-                  無料駐車場（60台）をご用意しております<br>
-                  <span style="font-size: 0.8rem; color: var(--color-brown-medium);">
-                    長崎バイパス「川平IC」より市街地方面へ約5分
+                <div class="info-card__value" style="font-size: 0.85rem;">
+                  <span class="text-wrap">無料駐車場（60台）を</span><span class="text-wrap">ご用意しております</span><br>
+                  <span class="text-wrap" style="color: var(--color-brown-medium);">
+                    長崎バイパス「川平IC」より
+                  </span>
+                  <span class="text-wrap" style="color: var(--color-brown-medium);">
+                    市街地方面へ約5分
                   </span>
                 </div>
               </div>
@@ -343,70 +301,7 @@
     </div>
   </section>
 
-  <!-- ========== GUEST INFO / ゲストの皆さまへ ========== -->
-  <section class="gallery section-padding" id="notice">
-    <div class="container">
-      <div class="section-heading fade-in">
-        <h2 class="section-heading__en">GUEST INFO</h2>
-        <span class="section-heading__line"></span>
-        <p class="section-heading__jp">ゲストの皆さまへのお願い</p>
-      </div>
 
-      <div class="notice-grid">
-        <div class="notice-card fade-in" id="notice-1">
-          <h3 class="notice-card__title">ご出欠のご連絡</h3>
-          <p class="notice-card__text">
-            誠に恐れ入りますが<br>
-            <strong>2026年8月31日（月）</strong>までに<br>
-            ご出欠のご連絡をお願い申し上げます。
-          </p>
-          <a href="invite/index.html" class="notice-card__btn">RSVPフォームへ</a>
-        </div>
-        <div class="notice-card fade-in fade-in-delay-1" id="notice-2">
-          <h3 class="notice-card__title">服装について</h3>
-          <p class="notice-card__text">
-            フォーマルまたはセミフォーマルで<br>
-            お越しくださいませ。<br>
-            <span style="font-size: 0.78rem; color: var(--color-brown-light);">
-              男性：スーツ ／ 女性：ドレス・ワンピース
-            </span>
-          </p>
-        </div>
-        <div class="notice-card fade-in fade-in-delay-2" id="notice-3">
-          <h3 class="notice-card__title">ご祝儀について</h3>
-          <p class="notice-card__text">
-            ご祝儀は当日受付にて<br>
-            頂戴できますと幸いです。
-          </p>
-        </div>
-        <div class="notice-card fade-in fade-in-delay-3" id="notice-4">
-          <h3 class="notice-card__title">お食事について</h3>
-          <p class="notice-card__text">
-            アレルギーや食事制限がございましたら<br>
-            RSVPフォームにてお知らせください。
-          </p>
-        </div>
-        <div class="notice-card fade-in fade-in-delay-1" id="notice-5">
-          <h3 class="notice-card__title">写真撮影</h3>
-          <p class="notice-card__text">
-            当日はカメラマンがおりますが<br>
-            皆さまもぜひお写真を<br>
-            お撮りいただけると嬉しいです。
-          </p>
-        </div>
-        <div class="notice-card fade-in fade-in-delay-2" id="notice-6">
-          <h3 class="notice-card__title">お問い合わせ</h3>
-          <p class="notice-card__text">
-            ご不明な点がございましたら<br>
-            お気軽にご連絡ください。
-          </p>
-          <p style="font-size: 0.78rem; color: var(--color-brown-light); margin-top: var(--space-xs);">
-            shunsuke.ayaka@example.com
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ========== RSVP / ご出欠 ========== -->
   <section class="thankyou section-padding" id="rsvp">

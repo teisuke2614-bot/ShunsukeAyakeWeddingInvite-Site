@@ -3,30 +3,32 @@
    Invitation Form & Admin Styles
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
 :root {
-  --color-cream: #FFF8F0;
-  --color-cream-light: #FFFCF8;
-  --color-cream-dark: #F5EDE4;
-  --color-sage: #A3B18A;
-  --color-sage-light: #EBF0E4;
-  --color-sage-medium: #8B9A6B;
-  --color-sage-dark: #5E6E4A;
-  --color-pink: #E8C4B8;
-  --color-pink-light: #F5E4DC;
-  --color-pink-medium: #D4A090;
-  --color-gold: #C9A96E;
-  --color-gold-light: #E0CFA0;
-  --color-brown: #3A3230;
-  --color-brown-medium: #6B6360;
-  --color-brown-light: #9A9490;
-  --color-terra: #B8756C;
+  /* Colors */
+  --color-cream: #FAFAFA;       /* Light neutral */
+  --color-cream-light: #FFFFFF; /* Pure white */
+  --color-cream-dark: #F0F0F0;  /* Slightly darker neutral */
+  --color-sage: #B0B3B8;        /* Soft silver/grey */
+  --color-sage-light: #E8EAED;
+  --color-sage-medium: #8D939C;
+  --color-sage-dark: #5E646A;
+  --color-pink: #D6CCC2;        /* Warm greige */
+  --color-pink-light: #F5EBE6;
+  --color-pink-medium: #B8AFA6;
+  --color-gold: #C0A080;        /* Champagne gold */
+  --color-gold-light: #D4BAA3;
+  --color-brown: #2D2C2A;       /* Deep charcoal/brown */
+  --color-brown-medium: #54524E;
+  --color-brown-light: #8A8883;
+  --color-terra: #A68A6D;       /* Warm metallic tone */
   --color-white: #FFFFFF;
   --color-error: #C85A54;
   --color-success: #6B9A6B;
 
-  --font-script: 'Great Vibes', cursive;
+  /* Typography */
+  --font-script: 'Dancing Script', cursive;
   --font-serif-en: 'Cormorant Garamond', 'Playfair Display', serif;
   --font-serif-jp: 'Noto Serif JP', serif;
   --font-sans-jp: 'Noto Sans JP', sans-serif;
@@ -102,8 +104,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .rsvp-header__back:hover { color: var(--color-brown); }
 
 .rsvp-header__logo {
-  font-family: var(--font-script);
+  font-family: var(--font-serif-en);
   font-size: 2rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.1em;
   color: var(--color-gold);
   margin-bottom: 4px;
 }
@@ -437,23 +442,52 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   align-items: center;
   justify-content: center;
   padding: 28px 20px;
-  border: 2px solid var(--color-cream-dark);
+  border: 2px solid var(--color-gold-light);
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  background: var(--color-cream-light);
+  background: var(--color-white);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(0);
 }
 
 .attendance-option label:hover {
-  border-color: var(--color-sage);
-  background: var(--color-white);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-4px);
 }
 
-.attendance-option input[type="radio"]:checked + label {
-  border-color: var(--color-sage-medium);
+/* Attending (Yes) Styles */
+#attend-yes:checked + label {
+  border-color: var(--color-terra);
+  background: var(--color-pink-light);
+  box-shadow: 0 6px 20px rgba(166, 138, 109, 0.25);
+  transform: translateY(-2px);
+}
+#attend-yes:checked + label .att-icon svg {
+  stroke: var(--color-terra) !important;
+}
+#attend-yes:checked + label .att-text,
+#attend-yes:checked + label .att-en {
+  color: var(--color-terra);
+  font-weight: 500;
+}
+
+/* Not Attending (No) Styles */
+#attend-no:checked + label {
+  border-color: var(--color-sage-dark);
   background: var(--color-sage-light);
-  box-shadow: 0 0 0 3px rgba(139, 154, 107, 0.2);
+  box-shadow: 0 6px 20px rgba(94, 100, 106, 0.15);
+  transform: translateY(-2px);
+}
+#attend-no:checked + label .att-icon svg {
+  stroke: var(--color-sage-dark) !important;
+}
+#attend-no:checked + label .att-text,
+#attend-no:checked + label .att-en {
+  color: var(--color-sage-dark);
+  font-weight: 500;
 }
 
 .attendance-option label .att-icon {

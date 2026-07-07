@@ -8,7 +8,7 @@
   <meta name="description" content="俊佐と采加の結婚式へのご出欠をお知らせください。2026年11月22日（日）">
   <meta name="theme-color" content="#8B9A6B">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%23C9A96E' stroke-width='6'/><circle cx='50' cy='30' r='6' fill='%23C9A96E'/></svg>">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -27,12 +27,8 @@
     <p class="rsvp-header__wedding">WEDDING INVITATION</p>
 
     <h1 class="rsvp-header__title">ご出欠のご連絡</h1>
-    <p class="rsvp-header__sub">
-      おふたりの大切な日にご参加いただけるか<br>
-      下記フォームよりご回答ください。
-    </p>
 
-    <div class="rsvp-header__date">
+    <div class="rsvp-header__date" style="margin-top: 16px;">
       <span>2026.11.22</span>
       <span class="dot"></span>
       <span>SUN</span>
@@ -171,37 +167,6 @@
             </select>
             <p class="form-error-msg" id="err-relationship">関係を選択してください</p>
           </div>
-
-          <!-- Companion section (only for attending) -->
-          <div class="companion-section" id="companion-section">
-            <div class="form-group">
-              <label class="form-label">同伴者はいますか？</label>
-              <label class="form-checkbox">
-                <input type="checkbox" id="has-companion" name="hasCompanion">
-                同伴者がいます
-              </label>
-            </div>
-
-            <div id="companion-fields" style="display: none;">
-              <div class="form-group">
-                <label class="form-label" for="companion-count">同伴者の人数</label>
-                <select class="form-select" id="companion-count" name="companionCount">
-                  <option value="1">1名</option>
-                  <option value="2">2名</option>
-                  <option value="3">3名</option>
-                  <option value="4">4名</option>
-                </select>
-              </div>
-              <div id="companion-names">
-                <div class="companion-entry">
-                  <div class="form-group">
-                    <label class="form-label" for="companion-name-1">同伴者のお名前</label>
-                    <input type="text" class="form-input" id="companion-name-1" name="companionName1" placeholder="お名前を入力">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="form-nav">
@@ -221,39 +186,12 @@
         <div class="form-card" id="meal-card">
           <h2 class="form-card__title">
             <span class="form-card__title-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
-            お食事の選択
+            アレルギー・食事制限について
           </h2>
           <p class="form-card__desc">
-            ご希望のお食事をお選びください。
+            アレルギーや食事制限がある方はご記入ください。
           </p>
 
-          <div class="form-group">
-            <div class="form-label">メインディッシュ <span class="required">必須</span></div>
-            <div class="meal-options">
-              <div class="meal-option">
-                <input type="radio" name="meal" id="meal-meat" value="肉料理">
-                <label for="meal-meat">
-                  <span class="meal-icon">M</span>
-                  <span class="meal-name">肉料理</span>
-                </label>
-              </div>
-              <div class="meal-option">
-                <input type="radio" name="meal" id="meal-fish" value="魚料理">
-                <label for="meal-fish">
-                  <span class="meal-icon">F</span>
-                  <span class="meal-name">魚料理</span>
-                </label>
-              </div>
-              <div class="meal-option">
-                <input type="radio" name="meal" id="meal-veg" value="ベジタリアン">
-                <label for="meal-veg">
-                  <span class="meal-icon">V</span>
-                  <span class="meal-name">ベジタリアン</span>
-                </label>
-              </div>
-            </div>
-            <p class="form-error-msg" id="err-meal">お食事を選択してください</p>
-          </div>
 
           <div class="form-group">
             <label class="form-label" for="allergy">アレルギー・食事制限 <span class="optional">任意</span></label>
@@ -381,6 +319,6 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
