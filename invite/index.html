@@ -194,9 +194,16 @@
 
 
           <div class="form-group">
-            <label class="form-label" for="allergy">アレルギー・食事制限 <span class="optional">任意</span></label>
+            <label class="form-label" for="allergy-select">アレルギー・食事制限の有無 <span class="required">必須</span></label>
+            <select class="form-select" id="allergy-select" name="allergySelect" onchange="const d = document.getElementById('allergy-details'); if(this.value==='あり'){d.style.display='block';}else{d.style.display='none';document.getElementById('allergy').value='';}">
+              <option value="なし">なし</option>
+              <option value="あり">あり</option>
+            </select>
+          </div>
+          <div class="form-group" id="allergy-details" style="display: none; margin-top: 16px;">
+            <label class="form-label" for="allergy">具体的な内容 <span class="required">必須</span></label>
             <input type="text" class="form-input" id="allergy" name="allergy" placeholder="例：エビ、カニ、小麦">
-            <p class="form-hint">※ アレルギーがある場合はご記入ください</p>
+            <p class="form-error-msg" id="err-allergy">アレルギー等の詳細を入力してください</p>
           </div>
         </div>
 

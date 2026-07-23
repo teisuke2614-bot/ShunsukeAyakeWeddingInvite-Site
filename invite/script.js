@@ -136,7 +136,13 @@ function validateStep(step) {
   }
 
   if (step === 3) {
-    // No meal validation needed anymore
+    const allergySelect = document.getElementById('allergy-select');
+    const allergyDetails = document.getElementById('allergy');
+    if (allergySelect && allergySelect.value === 'あり' && !allergyDetails.value.trim()) {
+      showError('err-allergy');
+      allergyDetails.classList.add('error');
+      isValid = false;
+    }
   }
 
   return isValid;
@@ -246,7 +252,7 @@ function collectFormData() {
     companionCount: 0,
     companionNames: [],
     meal: '',
-    allergy: document.getElementById('allergy').value.trim(),
+    allergy: document.getElementById('allergy-select') && document.getElementById('allergy-select').value === 'あり' ? document.getElementById('allergy').value.trim() : 'なし',
     shuttle: shuttle ? shuttle.value : '利用しない',
     message: document.getElementById('message').value.trim(),
   };
