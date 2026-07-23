@@ -55,30 +55,6 @@
       </div>
     </div>
 
-    <!-- Meal Stats -->
-    <div class="admin-stats" style="margin-bottom: 32px;">
-      <div class="stat-card">
-        <div class="stat-card__icon"><span class="stat-icon stat-icon--meat"></span></div>
-        <div class="stat-card__value" id="stat-meat">0</div>
-        <div class="stat-card__label">肉料理</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon"><span class="stat-icon stat-icon--fish"></span></div>
-        <div class="stat-card__value" id="stat-fish">0</div>
-        <div class="stat-card__label">魚料理</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon"><span class="stat-icon stat-icon--veg"></span></div>
-        <div class="stat-card__value" id="stat-veg">0</div>
-        <div class="stat-card__label">ベジタリアン</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__icon"><span class="stat-icon stat-icon--allergy"></span></div>
-        <div class="stat-card__value" id="stat-allergy">0</div>
-        <div class="stat-card__label">アレルギーあり</div>
-      </div>
-    </div>
-
     <!-- Toolbar -->
     <div class="admin-toolbar">
       <input type="text" class="admin-toolbar__search" id="search-input" placeholder="名前で検索...">
@@ -114,7 +90,6 @@
             <th>メール</th>
             <th>関係</th>
             <th>同伴者</th>
-            <th>お食事</th>
             <th>アレルギー</th>
             <th>バス</th>
             <th>メッセージ</th>
@@ -173,13 +148,6 @@
       document.getElementById('stat-shuttle').textContent =
         attending.filter(r => r.shuttle === '利用する').length;
 
-      // Meal stats
-      document.getElementById('stat-meat').textContent =
-        attending.filter(r => r.meal === '肉料理').length;
-      document.getElementById('stat-fish').textContent =
-        attending.filter(r => r.meal === '魚料理').length;
-      document.getElementById('stat-veg').textContent =
-        attending.filter(r => r.meal === 'ベジタリアン').length;
       document.getElementById('stat-allergy').textContent =
         responses.filter(r => r.allergy && r.allergy.trim()).length;
     }
@@ -237,7 +205,6 @@
               ? r.companionNames.join('<br>')
               : '—'}
           </td>
-          <td>${r.meal || '—'}</td>
           <td style="font-size: 0.75rem; color: ${r.allergy ? 'var(--color-error)' : 'var(--color-brown-light)'};">
             ${r.allergy || '—'}
           </td>
