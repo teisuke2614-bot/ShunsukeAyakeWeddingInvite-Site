@@ -50,6 +50,16 @@ function showStep(step) {
   const target = document.getElementById(`step-${step}`);
   if (target) {
     target.classList.add('active');
+    
+    // Toggle absent fields on step 2
+    if (step === 2) {
+      const attendance = document.querySelector('input[name="attendance"]:checked');
+      const isAbsent = attendance && attendance.value === '欠席';
+      document.querySelectorAll('.group-absent-hide').forEach(el => {
+        el.style.display = isAbsent ? 'none' : 'block';
+      });
+    }
+
     // Generate review if on step 4
     if (step === 4) generateReview();
   }
@@ -101,13 +111,21 @@ function validateStep(step) {
   }
 
   if (step === 2) {
+    const attendance = document.querySelector('input[name="attendance"]:checked');
+    const isAbsent = attendance && attendance.value === '欠席';
+
     const fields = [
       { id: 'last-name', error: 'err-lastName' },
-      { id: 'first-name', error: 'err-firstName' },
-      { id: 'last-name-kana', error: 'err-lastNameKana' },
-      { id: 'first-name-kana', error: 'err-firstNameKana' },
-      { id: 'email', error: 'err-email' },
+      { id: 'first-name', error: 'err-firstName' }
     ];
+
+    if (!isAbsent) {
+      fields.push(
+        { id: 'last-name-kana', error: 'err-lastNameKana' },
+        { id: 'first-name-kana', error: 'err-firstNameKana' },
+        { id: 'email', error: 'err-email' }
+      );
+    }
 
     fields.forEach(f => {
       const el = document.getElementById(f.id);
@@ -118,20 +136,22 @@ function validateStep(step) {
       }
     });
 
-    // Email format check
-    const emailEl = document.getElementById('email');
-    if (emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-      showError('err-email');
-      emailEl.classList.add('error');
-      isValid = false;
-    }
+    if (!isAbsent) {
+      // Email format check
+      const emailEl = document.getElementById('email');
+      if (emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+        showError('err-email');
+        emailEl.classList.add('error');
+        isValid = false;
+      }
 
-    // Relationship
-    const rel = document.getElementById('relationship');
-    if (!rel.value) {
-      showError('err-relationship');
-      rel.classList.add('error');
-      isValid = false;
+      // Relationship
+      const rel = document.getElementById('relationship');
+      if (!rel.value) {
+        showError('err-relationship');
+        rel.classList.add('error');
+        isValid = false;
+      }
     }
   }
 
@@ -203,14 +223,13 @@ function generateReview() {
   const rows = [
     ['ご出欠', data.attendance],
     ['お名前', `${data.lastName} ${data.firstName}`],
-    ['フリガナ', `${data.lastNameKana} ${data.firstNameKana}`],
-    ['メールアドレス', data.email],
   ];
 
-  if (data.phone) rows.push(['電話番号', data.phone]);
-  rows.push(['新郎新婦との関係', data.relationship]);
-
-  if (data.attendance === '出席') {
+  if (data.attendance !== '欠席') {
+    rows.push(['フリガナ', `${data.lastNameKana} ${data.firstNameKana}`]);
+    rows.push(['メールアドレス', data.email]);
+    if (data.phone) rows.push(['電話番号', data.phone]);
+    rows.push(['新郎新婦との関係', data.relationship]);
     if (data.allergy) rows.push(['アレルギー', data.allergy]);
     rows.push(['送迎バス', data.shuttle]);
   }
