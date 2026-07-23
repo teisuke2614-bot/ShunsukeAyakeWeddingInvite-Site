@@ -430,7 +430,7 @@ async function addSampleData() {
       lastName: '田中', firstName: '太郎', lastNameKana: 'タナカ', firstNameKana: 'タロウ',
       email: 'tanaka@example.com', phone: '090-1111-2222', relationship: '新郎友人',
       hasCompanion: false, companionCount: 0, companionNames: [],
-      meal: '肉料理', allergy: '', shuttle: '利用する', message: '結婚おめでとう！楽しみにしてます！'
+      meal: '肉料理', allergy: '', shuttle: '利用する（諫早駅）', message: '結婚おめでとう！楽しみにしてます！'
     },
     {
       id: 's2', timestamp: new Date(Date.now() - 86400000).toISOString(), attendance: '出席',
@@ -451,14 +451,14 @@ async function addSampleData() {
       lastName: '鈴木', firstName: '美咲', lastNameKana: 'スズキ', firstNameKana: 'ミサキ',
       email: 'suzuki@example.com', phone: '070-5555-6666', relationship: '新婦親族',
       hasCompanion: true, companionCount: 2, companionNames: ['鈴木 健太', '鈴木 愛'],
-      meal: 'ベジタリアン', allergy: '小麦', shuttle: '利用する', message: '家族みんなで楽しみにしてます！'
+      meal: 'ベジタリアン', allergy: '小麦', shuttle: '利用する（新大村駅）', message: '家族みんなで楽しみにしてます！'
     },
     {
       id: 's5', timestamp: new Date(Date.now() - 345600000).toISOString(), attendance: '出席',
       lastName: '高橋', firstName: '翔太', lastNameKana: 'タカハシ', firstNameKana: 'ショウタ',
       email: 'takahashi@example.com', phone: '090-7777-8888', relationship: '新郎友人',
       hasCompanion: false, companionCount: 0, companionNames: [],
-      meal: '肉料理', allergy: '', shuttle: '利用する', message: ''
+      meal: '肉料理', allergy: '', shuttle: '利用する（諫早駅）', message: ''
     }
   ];
 

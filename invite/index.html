@@ -211,12 +211,19 @@
 
           <div class="form-group">
             <div class="form-label">送迎バスの利用 <span class="optional">任意</span></div>
-            <div class="attendance-options">
+            <div class="attendance-options" style="grid-template-columns: 1fr;">
               <div class="attendance-option">
-                <input type="radio" name="shuttle" id="shuttle-yes" value="利用する">
-                <label for="shuttle-yes">
+                <input type="radio" name="shuttle" id="shuttle-isahaya" value="利用する（諫早駅）">
+                <label for="shuttle-isahaya">
                   <span class="att-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-sage-dark)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-                  <span class="att-text">利用する</span>
+                  <span class="att-text">利用する（諫早駅）</span>
+                </label>
+              </div>
+              <div class="attendance-option">
+                <input type="radio" name="shuttle" id="shuttle-shinomura" value="利用する（新大村駅）">
+                <label for="shuttle-shinomura">
+                  <span class="att-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-sage-dark)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                  <span class="att-text">利用する（新大村駅）</span>
                 </label>
               </div>
               <div class="attendance-option">
