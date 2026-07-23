@@ -1077,6 +1077,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   padding: 14px 16px;
   border-bottom: 1px solid var(--color-cream-dark);
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .admin-table tr:last-child td { border-bottom: none; }
