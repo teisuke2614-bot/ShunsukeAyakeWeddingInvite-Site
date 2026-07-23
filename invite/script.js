@@ -156,6 +156,10 @@ function clearErrors() {
 // COMPANION SECTION TOGGLE
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
+  // Init
+  window.scrollTo(0, 0);
+  updateProgress();
+
   // Form submit handler
   const form = document.getElementById('rsvp-form');
   if (form) {
@@ -256,6 +260,10 @@ async function handleSubmit(e) {
 
   // Validate all steps
   if (!validateStep(currentStep)) return;
+
+  if (!confirm("入力内容を送信しますか？")) {
+    return;
+  }
 
   const data = collectFormData();
 

@@ -492,17 +492,21 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 /* Not Attending (No) Styles */
-#attend-no:checked + label {
+#attend-no:checked + label,
+#shuttle-no:checked + label {
   border-color: var(--color-sage-dark);
   background: var(--color-sage-light);
   box-shadow: 0 6px 20px rgba(94, 100, 106, 0.15);
   transform: translateY(-2px);
 }
-#attend-no:checked + label .att-icon svg {
+#attend-no:checked + label .att-icon svg,
+#shuttle-no:checked + label .att-icon svg {
   stroke: var(--color-sage-dark) !important;
 }
 #attend-no:checked + label .att-text,
-#attend-no:checked + label .att-en {
+#attend-no:checked + label .att-en,
+#shuttle-no:checked + label .att-text,
+#shuttle-no:checked + label .att-en {
   color: var(--color-sage-dark);
   font-weight: 500;
 }
@@ -974,12 +978,14 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .admin-toolbar__actions {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .btn--admin {
   font-size: 0.78rem;
   padding: 10px 20px;
   border-radius: var(--radius-md);
+  white-space: nowrap;
 }
 
 .btn--export {
