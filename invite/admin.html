@@ -49,11 +49,6 @@
         <div class="stat-card__value" id="stat-shuttle">0</div>
         <div class="stat-card__label">送迎バス利用</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__icon"><span class="stat-icon stat-icon--allergy"></span></div>
-        <div class="stat-card__value" id="stat-allergy">0</div>
-        <div class="stat-card__label">アレルギーあり</div>
-      </div>
     </div>
 
     <!-- Toolbar -->
@@ -77,6 +72,7 @@
       <button class="filter-tab active" data-filter="all" onclick="setFilter('all', this)">すべて</button>
       <button class="filter-tab" data-filter="出席" onclick="setFilter('出席', this)">出席のみ</button>
       <button class="filter-tab" data-filter="欠席" onclick="setFilter('欠席', this)">欠席のみ</button>
+      <button class="filter-tab" data-filter="アレルギー" onclick="setFilter('アレルギー', this)">アレルギーあり</button>
     </div>
 
     <!-- Data Table -->
@@ -139,9 +135,6 @@
       document.getElementById('stat-absent').textContent = absent.length;
       document.getElementById('stat-shuttle').textContent =
         attending.filter(r => r.shuttle === '利用する').length;
-
-      document.getElementById('stat-allergy').textContent =
-        responses.filter(r => r.allergy && r.allergy.trim()).length;
     }
 
     function renderTable() {
@@ -149,7 +142,11 @@
 
       // Apply filter
       if (currentFilter !== 'all') {
-        responses = responses.filter(r => r.attendance === currentFilter);
+        if (currentFilter === 'アレルギー') {
+          responses = responses.filter(r => r.allergy && r.allergy !== 'なし' && r.allergy.trim() !== '');
+        } else {
+          responses = responses.filter(r => r.attendance === currentFilter);
+        }
       }
 
       // Apply search
