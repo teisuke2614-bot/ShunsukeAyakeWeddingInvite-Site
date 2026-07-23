@@ -26,6 +26,9 @@
   --color-white: #FFFFFF;
   --color-error: #C85A54;
   --color-success: #6B9A6B;
+  --color-deep-green: #4A5A35;
+  --color-deep-green-light: #F0F4EC;
+  --color-deep-green-hover: #3B482A;
 
   /* Typography */
   --font-script: 'Dancing Script', cursive;
@@ -459,18 +462,26 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 /* Attending (Yes) Styles */
-#attend-yes:checked + label {
-  border-color: var(--color-terra);
-  background: var(--color-pink-light);
-  box-shadow: 0 6px 20px rgba(166, 138, 109, 0.25);
+#attend-yes:checked + label,
+#shuttle-isahaya:checked + label,
+#shuttle-shinomura:checked + label {
+  border-color: var(--color-deep-green);
+  background: var(--color-deep-green-light);
+  box-shadow: 0 6px 20px rgba(74, 90, 53, 0.25);
   transform: translateY(-2px);
 }
-#attend-yes:checked + label .att-icon svg {
-  stroke: var(--color-terra) !important;
+#attend-yes:checked + label .att-icon svg,
+#shuttle-isahaya:checked + label .att-icon svg,
+#shuttle-shinomura:checked + label .att-icon svg {
+  stroke: var(--color-deep-green) !important;
 }
 #attend-yes:checked + label .att-text,
-#attend-yes:checked + label .att-en {
-  color: var(--color-terra);
+#attend-yes:checked + label .att-en,
+#shuttle-isahaya:checked + label .att-text,
+#shuttle-isahaya:checked + label .att-en,
+#shuttle-shinomura:checked + label .att-text,
+#shuttle-shinomura:checked + label .att-en {
+  color: var(--color-deep-green);
   font-weight: 500;
 }
 
@@ -665,14 +676,14 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 .btn--primary {
-  background: var(--color-sage-medium);
+  background: var(--color-deep-green);
   color: var(--color-white);
 }
 
 .btn--primary:hover {
-  background: var(--color-sage-dark);
+  background: var(--color-deep-green-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(139, 154, 107, 0.3);
+  box-shadow: 0 4px 20px rgba(74, 90, 53, 0.3);
 }
 
 .btn--secondary {
