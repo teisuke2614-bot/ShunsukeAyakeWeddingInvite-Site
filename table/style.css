@@ -3,6 +3,12 @@
    ============================================================ */
 
 /* --- CSS Custom Properties (Inherited & Adjusted) --- */
+@font-face {
+  font-family: 'SimpleAmpersand';
+  src: local('Helvetica'), local('Arial'), local('sans-serif');
+  unicode-range: U+0026;
+}
+
 :root {
   --color-cream: #FFF8F0;
   --color-cream-light: #FFFCF8;
@@ -18,8 +24,8 @@
   --color-terra: #B8756C;
   --color-white: #FFFFFF;
 
-  --font-script: 'Great Vibes', cursive;
-  --font-serif-en: 'Cormorant Garamond', serif;
+  --font-script: 'SimpleAmpersand', 'Great Vibes', cursive;
+  --font-serif-en: 'SimpleAmpersand', 'Cormorant Garamond', serif;
   --font-serif-jp: 'Noto Serif JP', serif;
   --font-sans-jp: 'Noto Sans JP', sans-serif;
 
