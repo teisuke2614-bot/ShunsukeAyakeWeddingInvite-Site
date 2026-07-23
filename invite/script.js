@@ -123,6 +123,8 @@ function validateStep(step) {
       fields.push(
         { id: 'last-name-kana', error: 'err-lastNameKana' },
         { id: 'first-name-kana', error: 'err-firstNameKana' },
+        { id: 'postal-code', error: 'err-postalCode' },
+        { id: 'address', error: 'err-address' },
         { id: 'email', error: 'err-email' }
       );
     }
@@ -227,6 +229,8 @@ function generateReview() {
 
   if (data.attendance !== '欠席') {
     rows.push(['フリガナ', `${data.lastNameKana} ${data.firstNameKana}`]);
+    rows.push(['郵便番号', data.postalCode]);
+    rows.push(['ご住所', data.address]);
     rows.push(['メールアドレス', data.email]);
     if (data.phone) rows.push(['電話番号', data.phone]);
     rows.push(['新郎新婦との関係', data.relationship]);
@@ -265,12 +269,10 @@ function collectFormData() {
     lastNameKana: document.getElementById('last-name-kana').value.trim(),
     firstNameKana: document.getElementById('first-name-kana').value.trim(),
     email: document.getElementById('email').value.trim(),
+    postalCode: document.getElementById('postal-code') ? document.getElementById('postal-code').value.trim() : '',
+    address: document.getElementById('address') ? document.getElementById('address').value.trim() : '',
     phone: document.getElementById('phone').value.trim(),
     relationship: document.getElementById('relationship').value,
-    hasCompanion: false,
-    companionCount: 0,
-    companionNames: [],
-    meal: '',
     allergy: document.getElementById('allergy-select') && document.getElementById('allergy-select').value === 'あり' ? document.getElementById('allergy').value.trim() : 'なし',
     shuttle: shuttle ? shuttle.value : '利用しない',
     message: document.getElementById('message').value.trim(),
@@ -469,36 +471,36 @@ async function addSampleData() {
     {
       id: 's1', timestamp: new Date().toISOString(), attendance: '出席',
       lastName: '田中', firstName: '太郎', lastNameKana: 'タナカ', firstNameKana: 'タロウ',
+      postalCode: '854-0012', address: '長崎県諫早市本町1-1',
       email: 'tanaka@example.com', phone: '090-1111-2222', relationship: '新郎友人',
-      hasCompanion: false, companionCount: 0, companionNames: [],
       allergy: '', shuttle: '利用する（諫早駅）', message: '結婚おめでとう！楽しみにしてます！'
     },
     {
       id: 's2', timestamp: new Date(Date.now() - 86400000).toISOString(), attendance: '出席',
       lastName: '佐藤', firstName: '花子', lastNameKana: 'サトウ', firstNameKana: 'ハナコ',
+      postalCode: '812-0012', address: '福岡県福岡市博多区1-1',
       email: 'sato@example.com', phone: '080-3333-4444', relationship: '新婦友人',
-      hasCompanion: true, companionCount: 1, companionNames: ['佐藤 次郎'],
       allergy: 'エビアレルギー', shuttle: '利用しない', message: 'お幸せに♡'
     },
     {
       id: 's3', timestamp: new Date(Date.now() - 172800000).toISOString(), attendance: '欠席',
       lastName: '山本', firstName: '一郎', lastNameKana: 'ヤマモト', firstNameKana: 'イチロウ',
+      postalCode: '', address: '',
       email: 'yamamoto@example.com', phone: '', relationship: '新郎同僚',
-      hasCompanion: false, companionCount: 0, companionNames: [],
       allergy: '', shuttle: '', message: '残念ですが出張で出席できません。お祝い申し上げます。'
     },
     {
       id: 's4', timestamp: new Date(Date.now() - 259200000).toISOString(), attendance: '出席',
       lastName: '鈴木', firstName: '美咲', lastNameKana: 'スズキ', firstNameKana: 'ミサキ',
+      postalCode: '856-0814', address: '長崎県大村市松並1-1',
       email: 'suzuki@example.com', phone: '070-5555-6666', relationship: '新婦親族',
-      hasCompanion: true, companionCount: 2, companionNames: ['鈴木 健太', '鈴木 愛'],
       allergy: '小麦', shuttle: '利用する（新大村駅）', message: '家族みんなで楽しみにしてます！'
     },
     {
       id: 's5', timestamp: new Date(Date.now() - 345600000).toISOString(), attendance: '出席',
       lastName: '高橋', firstName: '翔太', lastNameKana: 'タカハシ', firstNameKana: 'ショウタ',
+      postalCode: '850-0031', address: '長崎県長崎市江戸町1-1',
       email: 'takahashi@example.com', phone: '090-7777-8888', relationship: '新郎友人',
-      hasCompanion: false, companionCount: 0, companionNames: [],
       allergy: '', shuttle: '利用する（諫早駅）', message: ''
     }
   ];

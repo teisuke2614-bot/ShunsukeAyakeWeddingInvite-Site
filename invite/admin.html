@@ -43,11 +43,7 @@
         <div class="stat-card__value" id="stat-absent">0</div>
         <div class="stat-card__label">欠席</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__icon"><span class="stat-icon stat-icon--guests"></span></div>
-        <div class="stat-card__value" id="stat-guests">0</div>
-        <div class="stat-card__label">総出席人数（同伴者含む）</div>
-      </div>
+
       <div class="stat-card">
         <div class="stat-card__icon"><span class="stat-icon stat-icon--shuttle"></span></div>
         <div class="stat-card__value" id="stat-shuttle">0</div>
@@ -94,7 +90,7 @@
             <th>フリガナ</th>
             <th>メール</th>
             <th>関係</th>
-            <th>同伴者</th>
+            <th>ご住所</th>
             <th>アレルギー</th>
             <th>バス</th>
             <th>メッセージ</th>
@@ -138,18 +134,9 @@
       const attending = responses.filter(r => r.attendance === '出席');
       const absent = responses.filter(r => r.attendance === '欠席');
 
-      // Total guests including companions
-      let totalGuests = attending.length;
-      attending.forEach(r => {
-        if (r.hasCompanion && r.companionCount) {
-          totalGuests += r.companionCount;
-        }
-      });
-
       document.getElementById('stat-total').textContent = responses.length;
       document.getElementById('stat-attending').textContent = attending.length;
       document.getElementById('stat-absent').textContent = absent.length;
-      document.getElementById('stat-guests').textContent = totalGuests;
       document.getElementById('stat-shuttle').textContent =
         attending.filter(r => r.shuttle === '利用する').length;
 
@@ -206,9 +193,7 @@
           <td style="font-size: 0.75rem;">${r.email}</td>
           <td style="font-size: 0.75rem;">${r.relationship}</td>
           <td style="font-size: 0.75rem;">
-            ${r.hasCompanion && r.companionNames && r.companionNames.length > 0
-              ? r.companionNames.join('<br>')
-              : '—'}
+            ${r.postalCode ? '〒' + r.postalCode + '<br>' : ''}${r.address || '—'}
           </td>
           <td style="font-size: 0.75rem; color: ${r.allergy ? 'var(--color-error)' : 'var(--color-brown-light)'};">
             ${r.allergy || '—'}
