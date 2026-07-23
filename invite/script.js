@@ -281,13 +281,21 @@ async function handleSubmit(e) {
 }
 
 async function saveResponse(data) {
-  if (db) {
-    await db.collection("responses").doc(data.id).set(data);
-  } else {
-    // Fallback to localStorage if Firebase is not initialized
+  const saveToLocal = (data) => {
     const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     responses.push(data);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+  };
+
+  if (db) {
+    try {
+      await db.collection("responses").doc(data.id).set(data);
+    } catch (error) {
+      console.warn("Firebase save failed (check rules/setup). Falling back to localStorage.", error);
+      saveToLocal(data);
+    }
+  } else {
+    saveToLocal(data);
   }
 }
 
